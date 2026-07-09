@@ -36,8 +36,8 @@ class AbaJuntar:
         f_ctrl.pack(fill=X, pady=15)
         tb.Button(f_ctrl, text="Adicionar arquivos", command=self.adicionar, bootstyle="primary").pack(side=LEFT, padx=5)
         tb.Button(f_ctrl, text="Remover selecionado", command=self.remover, bootstyle="danger-outline").pack(side=LEFT, padx=5)
-        tb.Button(f_ctrl, text="Mover para cima", command=self.mover_baixo, bootstyle="secondary").pack(side=RIGHT, padx=5)
-        tb.Button(f_ctrl, text="Mover para baixo", command=self.mover_cima, bootstyle="secondary").pack(side=RIGHT, padx=5)
+        tb.Button(f_ctrl, text="Mover para cima", command=self.mover_cima, bootstyle="secondary").pack(side=RIGHT, padx=5)
+        tb.Button(f_ctrl, text="Mover para baixo", command=self.mover_baixo, bootstyle="secondary").pack(side=RIGHT, padx=5)
 
         tb.Checkbutton(frame, text="Máxima compressão (Aplica Ghostscript para redução severa)", variable=self.var_compressao,
                        bootstyle="danger-round-toggle").pack(anchor=W, pady=10)
