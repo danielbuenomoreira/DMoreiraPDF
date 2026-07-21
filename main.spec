@@ -1,19 +1,16 @@
 # -*- mode: python ; coding: utf-8 -*-
-from PyInstaller.utils.hooks import collect_all
+from PyInstaller.utils.hooks import collect_data_files
 
-datas = [('DMoreiraPDF.ico', '.'), ('gswin64c.exe', '.'), ('gsdll64.dll', '.')]
-binaries = []
-hiddenimports = []
-tmp_ret = collect_all('tkinterdnd2')
-datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
+datas = [('DMoreiraPDF.ico', '.')]
+datas += collect_data_files('tkinterdnd2')
 
 
 a = Analysis(
     ['main.py'],
     pathex=[],
-    binaries=binaries,
+    binaries=[('gsdll64.dll', '.'), ('gswin64c.exe', '.')],
     datas=datas,
-    hiddenimports=hiddenimports,
+    hiddenimports=[],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

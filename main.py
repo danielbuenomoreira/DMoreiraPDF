@@ -10,6 +10,7 @@ from aba_juntar import AbaJuntar
 from aba_dividir import AbaDividir
 from aba_lotes import AbaLotes
 from aba_renomear import AbaRenomear
+from aba_html_pdf import AbaHtmlPdf
 from pdf_motor import resource_path
 
 # Caminho do arquivo de configuração (Salvo na pasta de usuário do Windows)
@@ -59,6 +60,7 @@ class AppPrincipal:
         self.aba_dividir = AbaDividir(self.notebook, self.root)
         self.aba_lotes = AbaLotes(self.notebook, self.root)
         self.aba_renomear = AbaRenomear(self.notebook, self.root)
+        self.aba_html_pdf = AbaHtmlPdf(self.notebook, self.root)
 
         # Rodapé reestruturado para suportar o seletor de temas
         rodape = tb.Frame(self.root)
@@ -96,6 +98,9 @@ class AppPrincipal:
 
         # Salva a escolha do usuário
         salvar_tema(novo_tema)
+
+        # Dispara o evento virtual para as abas atualizarem componentes nativos
+        self.root.event_generate("<<ThemeChanged>>")
 
 
 if __name__ == "__main__":

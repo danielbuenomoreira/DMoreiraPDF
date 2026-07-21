@@ -21,6 +21,10 @@ class AbaJuntar:
 
         self._construir_ui()
 
+        # Escuta eventos de troca de tema para atualizar componentes nativos
+        self.root.bind("<<ThemeChanged>>", self._atualizar_cores_tema, add="+")
+        self._atualizar_cores_tema()
+
     def _construir_ui(self):
         frame = tb.Frame(self.container, padding=30)
         frame.pack(fill=BOTH, expand=True)
@@ -57,6 +61,18 @@ class AbaJuntar:
         self.btn_executar = tb.Button(frame, text="Processar PDFs", command=self.executar, state=DISABLED,
                                       bootstyle="success")
         self.btn_executar.pack(fill=X, pady=20)
+
+    def _atualizar_cores_tema(self, event=None):
+        """Aplica as cores do tema ativo do ttkbootstrap ao Listbox nativo."""
+        colors = tb.Style().colors
+        self.listbox.config(
+            bg=colors.inputbg,
+            fg=colors.inputfg,
+            selectbackground=colors.selectbg,
+            selectforeground=colors.selectfg,
+            highlightbackground=colors.border,
+            highlightcolor=colors.primary
+        )
 
     def drop(self, event):
         self._inserir_arquivos(self.root.tk.splitlist(event.data))

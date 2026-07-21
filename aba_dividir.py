@@ -24,6 +24,10 @@ class AbaDividir:
 
         self._construir_ui()
 
+        # Escuta eventos de troca de tema para atualizar componentes nativos
+        self.root.bind("<<ThemeChanged>>", self._atualizar_cores_tema, add="+")
+        self._atualizar_cores_tema()
+
     def _construir_ui(self):
         frame = tb.Frame(self.container, padding=30)
         frame.pack(fill=BOTH, expand=True)
@@ -96,6 +100,18 @@ class AbaDividir:
                                       bootstyle="primary")
         self.btn_executar.pack(fill=X, pady=10)
         self.mudar_modo()
+
+    def _atualizar_cores_tema(self, event=None):
+        """Aplica as cores do tema ativo do ttkbootstrap ao Listbox nativo."""
+        colors = tb.Style().colors
+        self.lb_pers.config(
+            bg=colors.inputbg,
+            fg=colors.inputfg,
+            selectbackground=colors.selectbg,
+            selectforeground=colors.selectfg,
+            highlightbackground=colors.border,
+            highlightcolor=colors.primary
+        )
 
     def mudar_modo(self):
         if self.var_modo.get() == "iguais":
